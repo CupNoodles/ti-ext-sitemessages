@@ -1,0 +1,16 @@
+{
+    "code": "cupnoodles.sitemessages",
+    "name": "Site Messages",
+    "description": "Manage templated site messages",
+    "version": "v1.0.0",
+    "author": "CupNoodles",
+    "icon": {
+      "class": "fa fa-message",
+      "backgroundColor": "#1B294B",
+      "color": "#fff"
+    },
+    "homepage": "",
+    "require": {
+      "igniter.frontend" : "*"
+    }
+  }
