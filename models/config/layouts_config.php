@@ -74,7 +74,7 @@ return [
             'pages' => [
                 'label' => 'lang:cupnoodles.sitemessages::default.pages',
                 'type' => 'selectlist',
-                'options' => \CupNoodles\SiteMessages\Models\Layouts::getPages(),
+                'options' => \CupNoodles\SiteMessages\Models\Layouts::getLayouts(),
                 'default' => [],
             ],
             'html' => [

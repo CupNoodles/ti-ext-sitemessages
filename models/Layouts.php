@@ -11,6 +11,9 @@ use Admin\Models\Locations_model;
 
 
 use Illuminate\Support\Facades\Log;
+use Main\Classes\MainController;
+
+use Main\Template\Layout as LayoutTemplate;
 
 class Layouts extends Model
 {
@@ -28,22 +31,17 @@ class Layouts extends Model
         'pages' => 'serialize',
     ];
 
-    public static function getPages(){
+    public static function getLayouts(){
         
-        $pages = [];
-        $pages['home'] = 'Home';
-        // Menu/Checkout for each location
-        foreach (Locations_model::all() as $location){
-	    	$pages[$location->permalink_slug . '/menus'] = $location->location_name . ' Menu';
-            $pages[$location->permalink_slug . '/checkout'] = $location->location_name . ' Checkout';
+        $layouts = [];
+        $controller = MainController::getController() ?: new MainController;
 
+        foreach ($controller->getTheme()->listLayouts() as $layout){
+            
+            $layouts[str_replace('.blade.php', '', $layout->fileName)] = $layout->description;
 	    };
 
-        foreach(Pages_model::all() as $page){
-            $pages[$page->permalink_slug] = $page->title;
-        }
-
-        return $pages;
+        return $layouts;
 
     }
 }

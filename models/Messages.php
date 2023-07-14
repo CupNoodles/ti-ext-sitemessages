@@ -18,6 +18,12 @@ class Messages extends Model
 
     public $timestamps = FALSE;
 
+    protected $dateFormat = 'Y-m-d';
+
+    protected $casts = [
+        'date_begin' => 'date',
+        'date_end' => 'date',
+    ];
 
 
     public static function getLayoutIdOptions()

@@ -68,12 +68,16 @@ return [
             'date_begin' => [
                 'label' => 'lang:cupnoodles.sitemessages::default.begin_date',
                 'type' => 'datepicker',
-                'mode' => 'date'
+                'mode' => 'date',
+                'span' => 'right',
+                'cssClass' => 'flex-width',
             ],
             'date_end' => [
                 'label' => 'lang:cupnoodles.sitemessages::default.end_date',
                 'type' => 'datepicker',
                 'mode' => 'date',
+                'span' => 'right',
+                'cssClass' => 'flex-width',
             ],
             'status' => [
                 'label' => 'lang:admin::lang.label_status',
