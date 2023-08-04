@@ -1,0 +1,13 @@
+.cupnoodles-sitemessages-footer{
+    display: none;
+}
+.cupnoodles-sitemessages-footer > div {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 20px;
+    font-size: 16px;
+    background-color: #fff;
+}

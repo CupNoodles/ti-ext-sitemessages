@@ -28,27 +28,35 @@ class Extension extends BaseExtension
             
             // get active Site Messages
             $messages = Messages::join('cupnoodles_sitemessages_layouts', 'cupnoodles_sitemessages_messages.layout_id', '=', 'cupnoodles_sitemessages_layouts.layout_id')
-            ->select('cupnoodles_sitemessages_layouts.html AS layout_html', 'cupnoodles_sitemessages_layouts.type', 'cupnoodles_sitemessages_layouts.pages' ,'cupnoodles_sitemessages_messages.*')
+            ->select('cupnoodles_sitemessages_layouts.html AS layout_html', 'cupnoodles_sitemessages_layouts.type', 'cupnoodles_sitemessages_layouts.pages' , 'cupnoodles_sitemessages_layouts.repeat_mode' , 'cupnoodles_sitemessages_messages.*')
             ->where('status', 1)
             ->whereRaw('NOW() BETWEEN date_begin AND DATE_ADD(date_end, INTERVAL 1 day)')->get();
             
+            $msg_arr = [];
             foreach($messages as $message){
 
                 foreach(unserialize($message->pages) as $page){
                     
                     if($page == $controller->getPage()->settings['layout']){
                         
-                        // message is active for this layout
-
-                        //generate html contents
                         $html = str_replace('MESSAGE_GOES_HERE', $message->html, $message->layout_html);
-                        Assets::putJsVars(['sitemessages_type' => $message->type, 'sitemessages_html' => $html]);
-                        Assets::addJS('extensions/cupnoodles/sitemessages/assets/js/sitemessages.js', 'cupnoodles-sitemessages-js');
+                        //generate html contents
+                        $msg_arr[] = [
+                            'msg_id'   => $message->message_id,
+                            'msg_type' => $message->type,
+                            'msg_repeat' => $message->repeat_mode,
+                            'msg_html' => $html,
+                        ];
 
                     }
                 }
             }
+            if(count($msg_arr)){
 
+                Assets::putJsVars(['cupnoodles_sitemessages' => $msg_arr]);
+                Assets::addJS('extensions/cupnoodles/sitemessages/assets/js/sitemessages.js', 'cupnoodles-sitemessages-js');
+                Assets::addCSS('extensions/cupnoodles/sitemessages/assets/css/sitemessages.css', 'cupnoodles-sitemessages-css');
+            }
 
         });
         

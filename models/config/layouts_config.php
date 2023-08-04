@@ -69,7 +69,7 @@ return [
                 'label' => 'lang:cupnoodles.sitemessages::default.repeat_mode',
                 'type' => 'select',
                 'default' => 'always',
-                'options' => ['Always show on load' => 'always', 'Hide once closed' => 'once'],
+                'options' => ['always' => 'Show on every load', 'once' => 'Hide once closed'],
             ],
             'pages' => [
                 'label' => 'lang:cupnoodles.sitemessages::default.pages',
